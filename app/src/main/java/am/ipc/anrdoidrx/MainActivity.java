@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observer;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -38,7 +40,11 @@ public class MainActivity extends AppCompatActivity {
                 logic.getHayk()
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Observer<User>() {
+                        .subscribe(new Subscriber<User>() {
+                            @Override
+                            public void onStart() {
+                                request(1);
+                            }
                             @Override
                             public void onCompleted() {
 
@@ -51,9 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onNext(User user) {
-                                Log.d("aaaa", "b1 " + user);
                                 data.add(user);
                                 adapter.notifyDataSetChanged();
+                                int needCount = Integer.parseInt(((EditText)findViewById(R.id.number)).getText().toString());
+                                if(data.size() < needCount){
+                                    request(1);
+                                }
                             }
                         });
             }

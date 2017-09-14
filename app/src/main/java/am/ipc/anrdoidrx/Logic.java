@@ -15,9 +15,9 @@ public class Logic {
         return  Observable.create(new Observable.OnSubscribe<User>() {
             @Override
             public void call(Subscriber<? super User> subscriber) {
-                for(int i=1;i<=2;i++){
+                for(int i=1;i<=10;i++){
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(1500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

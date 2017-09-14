@@ -32,8 +32,16 @@
             android:text="Anna" />
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/number"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="qani hat Hayk Load enem ?" />
+
+
     <ListView
         android:id="@+id/lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </LinearLayout>
